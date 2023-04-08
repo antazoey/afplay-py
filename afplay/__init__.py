@@ -35,3 +35,6 @@ def afplay(audio_file: AudioFile, stdout=DEVNULL, stderr=DEVNULL):
         _main(audio_file, stdout, stderr)
     except KeyboardInterrupt:
         sys.exit(130)
+
+
+__all__ = ["afplay"]
