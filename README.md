@@ -19,7 +19,7 @@ pip install .
 ## Quick Usage
 
 ```python
-import afplay
+from afplay import afplay
 
 afplay("path/to/file.mp3")
 ```
