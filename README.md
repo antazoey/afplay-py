@@ -23,7 +23,7 @@ Play an audio file:
 ```python
 from afplay import afplay
 
-afplay("path/to/file.mp3")
+afplay("path/to/file.mp3", volume=2, time=100, leaks=True)
 ```
 
 Check if `afplay` is installed:

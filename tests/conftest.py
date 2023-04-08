@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -12,15 +13,19 @@ def mock_player(mocker, devnull):
         _run = mocker.patch("afplay.run")
         _popen = mocker.patch("afplay.Popen")
 
-        def assert_played(self, _file, volume=None):
+        def assert_played(self, _file, **kwargs):
             cmd = ["afplay", str(_file)]
-            if volume is not None:
-                cmd.extend(("--volume", str(volume)))
+            for key, val in kwargs.items():
+                opt_str = f"--{key}"
+                if key in ("leaks",):
+                    cmd.append(opt_str)  # is_flag
+                else:
+                    cmd.extend((opt_str, str(val)))
 
-            self._popen.assert_called_once_with(cmd, stdout=devnull, stderr=devnull)
+            self._popen.assert_called_once_with(cmd, stdout=sys.stdout, stderr=sys.stderr)
 
         def assert_checked(self):
-            return self._run.call_count > 0
+            self._run.assert_called_once_with(["afplay"], stdout=devnull, stderr=devnull)
 
     return MockPlayer()
 
