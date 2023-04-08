@@ -23,4 +23,3 @@ from afplay import afplay
 
 afplay("path/to/file.mp3")
 ```
-    
