@@ -38,3 +38,12 @@ def afplay(audio_file: AudioFile, stdout=DEVNULL, stderr=DEVNULL):
 
 
 __all__ = ["afplay"]
+
+
+if __name__ == "__main__":
+    arguments = sys.argv[1:]
+    if not arguments:
+        print("Missing audio file argument.")
+        sys.exit(1)
+
+    afplay(*arguments)
