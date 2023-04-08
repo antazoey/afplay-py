@@ -8,7 +8,10 @@ AudioFile = Union[str, Path]
 
 
 def _validate(audio_file: AudioFile):
+    # Validate `afplay` command exists.
     run("afplay", stdout=DEVNULL, stderr=DEVNULL)
+
+    # Validate audio file exists.
     audio_file = Path(audio_file)
     if not audio_file.is_file():
         raise FileNotFoundError(str(audio_file))
@@ -16,6 +19,7 @@ def _validate(audio_file: AudioFile):
 
 def _main(audio_file: AudioFile, stdout, stderr):
     _validate(audio_file)
+    
     player = Popen(["afplay", str(audio_file)], stdout=stdout, stderr=stderr)
 
     # Wait to start playing.
