@@ -12,10 +12,12 @@ def mock_player(mocker, devnull):
         _run = mocker.patch("afplay.run")
         _popen = mocker.patch("afplay.Popen")
 
-        def assert_played(self, _file):
-            self._popen.assert_called_once_with(
-                ["afplay", str(_file)], stdout=devnull, stderr=devnull
-            )
+        def assert_played(self, _file, volume=None):
+            cmd = ["afplay", str(_file)]
+            if volume is not None:
+                cmd.extend(("--volume", str(volume)))
+
+            self._popen.assert_called_once_with(cmd, stdout=devnull, stderr=devnull)
 
         def assert_checked(self):
             return self._run.call_count > 0
