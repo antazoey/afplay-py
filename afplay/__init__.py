@@ -7,9 +7,13 @@ from typing import Union
 AudioFile = Union[str, Path]
 
 
-def _validate(audio_file: AudioFile):
-    # Validate `afplay` command exists.
+def _validate_afplay():
+    # Raises `FileNotFoundError` if afplay not found.
     run("afplay", stdout=DEVNULL, stderr=DEVNULL)
+
+
+def _validate(audio_file: AudioFile):
+    _validate_afplay()
 
     # Validate audio file exists.
     audio_file = Path(audio_file)
@@ -30,11 +34,23 @@ def _main(audio_file: AudioFile, stdout, stderr):
         time.sleep(1)
 
 
+"""Public"""
+
+
 def afplay(audio_file: AudioFile, stdout=DEVNULL, stderr=DEVNULL):
     try:
         _main(audio_file, stdout, stderr)
     except KeyboardInterrupt:
         sys.exit(130)
+
+
+def is_installed() -> bool:
+    try:
+        _validate_afplay()
+    except FileNotFoundError:
+        return False
+
+    return True
 
 
 __all__ = ["afplay"]

@@ -17,6 +17,9 @@ def mock_player(mocker, devnull):
                 ["afplay", str(_file)], stdout=devnull, stderr=devnull
             )
 
+        def assert_checked(self):
+            return self._run.call_count > 0
+
     return MockPlayer()
 
 

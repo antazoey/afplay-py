@@ -18,8 +18,18 @@ pip install .
 
 ## Quick Usage
 
+Play an audio file:
+
 ```python
 from afplay import afplay
 
 afplay("path/to/file.mp3")
+```
+
+Check if `afplay` is installed:
+
+```python
+from afplay import is_installed
+
+print(is_installed())
 ```
