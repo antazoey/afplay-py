@@ -44,7 +44,7 @@ def _main(audio_file: AudioFile, volume: Optional[Volume], stdout, stderr):
     if volume:
         cmd.extend(("--volume", str(volume)))
 
-    player = Popen(cmd, stdout=stdout, stderr=stderr)
+    player = Popen(cmd, stdout=sys.stdout, stderr=sys.stderr)
 
     # Wait to start playing.
     time.sleep(3)
