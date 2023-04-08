@@ -19,7 +19,7 @@ def _validate(audio_file: AudioFile):
 
 def _main(audio_file: AudioFile, stdout, stderr):
     _validate(audio_file)
-    
+
     player = Popen(["afplay", str(audio_file)], stdout=stdout, stderr=stderr)
 
     # Wait to start playing.
