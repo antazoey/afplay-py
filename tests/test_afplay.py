@@ -1,5 +1,6 @@
-from afplay import afplay
 import pytest
+
+from afplay import afplay
 
 
 def test_afplay_path(mock_process, audio_file, devnull):
