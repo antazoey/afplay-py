@@ -3,9 +3,7 @@
 from setuptools import find_packages, setup
 
 extras_require = {
-    "test": [
-        "pytest>=7.0",
-    ],
+    "test": ["pytest>=7.0", "pytest-mock>=3.10.0,<4"],
     "lint": [
         "black>=23.3.0",
         "mypy>=1.0,<2",
