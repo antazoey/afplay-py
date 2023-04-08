@@ -3,18 +3,9 @@ import pytest
 from afplay import afplay
 
 
-def test_afplay_path(mock_process, audio_file, devnull):
+def test_afplay_path(mock_player, audio_file):
     afplay(audio_file)
-    mock_process.assert_called_once_with(
-        ["afplay", str(audio_file)], stdout=devnull, stderr=devnull
-    )
-
-
-def test_afplay_str(mock_process, audio_file, devnull):
-    afplay(str(audio_file))
-    mock_process.assert_called_once_with(
-        ["afplay", str(audio_file)], stdout=devnull, stderr=devnull
-    )
+    mock_player.assert_played(audio_file)
 
 
 def test_afplay_missing_file(non_existing_audio_file):
