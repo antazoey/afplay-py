@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=51.1.1", "wheel", "setuptools_scm[toml]>=5.0"]
+
+[tool.setuptools_scm]
+write_to = "afplay/version.py"
+
+[tool.mypy]
+exclude = ["build/", "dist/", "docs/"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310']
+include = '\.pyi?$'
+
+[tool.isort]
+line_length = 100
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
