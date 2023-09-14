@@ -64,6 +64,9 @@ setup(
     keywords="afplay,macos",
     packages=find_packages(exclude=["tests", "tests.*"]),
     package_data={"afplay": ["py.typed"]},
+    entry_points={
+        "console_scripts": ["afplay-py=afplay:cli"],
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

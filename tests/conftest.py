@@ -4,43 +4,30 @@ from pathlib import Path
 
 import pytest
 
+from afplay.arguments import CommandArguments
+
 BASE_PATH = Path(__file__).parent
 
 
 @pytest.fixture(autouse=True)
-def mock_player(mocker, devnull):
+def mock_main(mocker, devnull):
     class MockPlayer:
-        _run = mocker.patch("afplay.run")
-        _popen = mocker.patch("afplay.Popen")
+        _main = mocker.patch("afplay.main")
 
-        def assert_played(self, _file, **kwargs):
-            cmd = ["afplay", str(_file)]
-            for key, val in kwargs.items():
-                opt_str = f"--{key}"
-                if key in ("leaks",):
-                    cmd.append(opt_str)  # is_flag
-                else:
-                    cmd.extend((opt_str, str(val)))
-
-            self._popen.assert_called_once_with(cmd, stdout=sys.stdout, stderr=sys.stderr)
-
-        def assert_checked(self):
-            self._run.assert_called_once_with(["afplay"], stdout=devnull, stderr=devnull)
+        def assert_called(self, *args, **kwargs):
+            if not isinstance(args[0], str):
+                pytest.fail(
+                    "You should be expecting a `str` path, " "did you forget to call `as_posix()`?"
+                )
+            expected = CommandArguments(*args, **kwargs)
+            self._main.assert_called_once_with(expected, stdout=sys.stdout, stderr=sys.stderr)
 
     return MockPlayer()
 
 
 @pytest.fixture
-def audio_file_path():
+def audio_file():
     return BASE_PATH / "foo.wav"
-
-
-@pytest.fixture(params=("path", "str"))
-def audio_file(request, audio_file_path):
-    if request.param == "path":
-        yield audio_file_path
-    else:
-        yield str(audio_file_path)
 
 
 @pytest.fixture
