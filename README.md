@@ -1,6 +1,6 @@
 # afplay-py
 
-A python wrapper around the macOS tool `afplay` (audio-file player).
+A python wrapper and better CLI for the macOS tool `afplay` (audio-file player).
 
 ## Installation
 
@@ -18,7 +18,19 @@ pip install .
 
 ## Quick Usage
 
-Play an audio file:
+### CLI
+
+Play an audio file using the CLI:
+
+```sh
+afplay-py ~/path/to/file.mp3
+```
+
+**NOTE**: The intent is for this CLI to not have some of the problems the regular tool does.
+
+### Python
+
+Play an audio file using Python:
 
 ```python
 from afplay import afplay
