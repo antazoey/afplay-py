@@ -1,7 +1,7 @@
 import sys
 from typing import Optional, Type, Union
 
-from afplay.command import AFPlayCommand
+from afplay.cli import AFPlayCommand
 from afplay.player import Player
 from afplay.types import File, IntStr, Quality
 

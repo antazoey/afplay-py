@@ -4,7 +4,7 @@ from subprocess import Popen
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from afplay.command import AFPlayCommand
+    from afplay.cli import AFPlayCommand
 
 
 class Player:

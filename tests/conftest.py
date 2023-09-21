@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from afplay.command import AFPlayCommand
+from afplay.cli import AFPlayCommand
 
 BASE_PATH = Path(__file__).parent
 

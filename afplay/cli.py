@@ -82,3 +82,7 @@ class AFPlayCommand:
         # or something.
         player = self.player_cls()
         player.play(self, stdout=stdout, stderr=stderr)
+
+
+def cli():
+    AFPlayCommand.from_sysargv().run()
